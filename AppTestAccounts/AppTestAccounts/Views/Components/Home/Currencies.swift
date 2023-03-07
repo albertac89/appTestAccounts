@@ -13,24 +13,29 @@ struct Currencies: View {
         VStack {
             HStack {
                 Text("Your currencies")
-                    .font(.system(size: 17))
+                    .font(.system(size: FontSize.textMedium, weight: .medium))
                 Spacer()
                 Text("View all")
-                    .font(.system(size: 17))
-                    .foregroundColor(.blue)
+                    .font(.system(size: FontSize.textMedium, weight: .medium))
+                    .foregroundColor(Color("actionText"))
             }
-            .padding(.leading, 24)
-            .padding(.trailing, 24)
-            .padding(.top, 40)
-            .padding(.bottom, 16)
+            .padding(.leading, Padding.currenciesTextLeading)
+            .padding(.trailing, Padding.currenciesTextTrailing)
+            .padding(.top, Padding.currenciesTextTop)
+            .padding(.bottom, Padding.currenciesTextBottom)
             List(accounts, id: \.accountId.self) { account in
                 AccountRow(account: account)
                     .listRowSeparator(.hidden)
+            }.refreshable {
+                // TODO - reload accounts
             }
             .listStyle(PlainListStyle())
+            Spacer()
         }
-        .background(.white)
-        .borderRadius(Color.red, width: 0, cornerRadius: 24, corners: [.topLeft, .topRight])
+        .background(Color("backgound"))
+        .borderRadius(cornerRadius: CornerRadius.big,
+                      corners: [.topLeft, .topRight])
+        
     }
 }
 

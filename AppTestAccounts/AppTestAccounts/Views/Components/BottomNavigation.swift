@@ -8,38 +8,53 @@
 import SwiftUI
 
 struct BottomNavigation: View {
+    @ObservedObject var mainViewModel: MainViewModel
+    @Environment(\.colorScheme) var colorScheme
     var body: some View {
         HStack {
-            VStack {
-                Image(uiImage: .add)
-                    .resizable()
-                    .frame(maxWidth: 28, maxHeight: 28, alignment: .center)
-                    .frame(maxWidth: .infinity, alignment: .center)
-                Text("Home")
-                    .font(.system(size: 11))
-                    .foregroundColor(.gray)
-                    .frame(maxWidth: .infinity, alignment: .center)
-            }
-            VStack {
-                Image(uiImage: .remove)
-                    .resizable()
-                    .frame(maxWidth: 28, maxHeight: 28, alignment: .center)
-                    .frame(maxWidth: .infinity, alignment: .center)
-                Text("Products")
-                    .font(.system(size: 11))
-                    .foregroundColor(.gray)
-                    .frame(maxWidth: .infinity, alignment: .center)
-            }
+            Button {
+                withAnimation {
+                    mainViewModel.navState = .home
+                }
+            } label: {
+                VStack {
+                    Image("homeIcon")
+                        .resizable()
+                        .frame(maxWidth: IconSize.nav, maxHeight: IconSize.nav, alignment: .center)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                    Text("Home")
+                        .font(.system(size: FontSize.textMicro))
+                        .frame(maxWidth: .infinity, alignment: .center)
+                }
+            }.foregroundColor(Color(mainViewModel.navState == .home ? "selectedIconColor" : "iconColor"))
+            Button {
+                withAnimation {
+                    mainViewModel.navState = .products
+                }
+            } label: {
+                VStack {
+                    Image("productsIcon")
+                        .resizable()
+                        .frame(maxWidth: IconSize.nav, maxHeight: IconSize.nav, alignment: .center)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                    Text("Products")
+                        .font(.system(size: FontSize.textMicro))
+                        .frame(maxWidth: .infinity, alignment: .center)
+                }
+            }.foregroundColor(Color(mainViewModel.navState == .products ? "selectedIconColor" : "iconColor"))
         }
-        .padding(.top, 21)
-        .background(.white)
-        .borderRadius(Color.red, width: 0, cornerRadius: 10, corners: [.topLeft, .topRight])
-        .shadow(color: Color.gray, radius: 3, y: -6)
+        .padding(.top, Padding.navigationTop)
+        .background(Color("itemBackgound")).edgesIgnoringSafeArea(.bottom)
+        .borderRadius(cornerRadius: CornerRadius.medium,
+                      corners: [.topLeft, .topRight])
+        .shadow(color: Color.gray,
+                radius: colorScheme == .dark ? .zero : ShadowSize.small,
+                y: colorScheme == .dark ? .zero : ShadowSize.offsetBig)
     }
 }
 
 struct BottomNavigation_Previews: PreviewProvider {
     static var previews: some View {
-        BottomNavigation()
+        BottomNavigation(mainViewModel: MainViewModel())
     }
 }

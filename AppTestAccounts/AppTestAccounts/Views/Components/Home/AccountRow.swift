@@ -9,30 +9,33 @@ import SwiftUI
 
 struct AccountRow: View {
     let account: Account
+    @Environment(\.colorScheme) var colorScheme
     var body: some View {
         HStack {
             HStack {
                 
             }
-            Image(uiImage: .add)
+            Image(account.amount.currency)
                 .resizable()
-                .frame(maxWidth: 32, maxHeight: 32)
+                .frame(maxWidth: IconSize.flag,
+                       maxHeight: IconSize.flag)
             VStack {
                 Text(account.amount.currency)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .font(.system(size: 17))
+                    .font(.system(size: FontSize.textMedium, weight: .medium))
                 Text(account.amount.currencyName)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .font(.system(size: 15))
+                    .font(.system(size: FontSize.textSmall))
                     .foregroundColor(.gray)
             }
             Spacer()
             Text(account.amount.amount)
+                .font(.system(size: FontSize.amount, weight: .medium))
         }
-        .padding(16)
-        .background(.white)
-        .cornerRadius(8)
-        .shadow(color: Color.gray, radius: 6)
+        .padding(Padding.rowContainer)
+        .background(Color("itemBackgound"))
+        .cornerRadius(CornerRadius.small)
+        .shadow(color: Color.gray, radius: colorScheme == .dark ? .zero : ShadowSize.big)
     }
 }
 

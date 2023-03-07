@@ -14,8 +14,7 @@ struct Home: View {
             HomeBanner()
             Spacer()
             Currencies(accounts: accounts)
-                .padding(.top, -60)
-            BottomNavigation()
+                .padding(.top, Padding.currenciesBottomOffset)
         }
     }
 }

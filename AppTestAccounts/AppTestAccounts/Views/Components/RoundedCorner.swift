@@ -19,7 +19,7 @@ struct RoundedCorner: Shape {
 }
 
 extension View {
-    public func borderRadius<S>(_ content: S, width: CGFloat = 1, cornerRadius: CGFloat, corners: UIRectCorner) -> some View where S : ShapeStyle {
+    public func borderRadius<S>(_ content: S = Color.white, width: CGFloat = .zero, cornerRadius: CGFloat, corners: UIRectCorner) -> some View where S : ShapeStyle {
         let roundedRect = RoundedCorner(radius: cornerRadius, corners: [.topLeft, .topRight])
         return clipShape(roundedRect)
             .overlay(roundedRect.stroke(content, lineWidth: width))
