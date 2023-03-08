@@ -1,5 +1,5 @@
 //
-//  Products.swift
+//  ProductsView.swift
 //  AppTestAccounts
 //
 //  Created by Albert Aige Cortasa on 7/3/23.
@@ -7,17 +7,17 @@
 
 import SwiftUI
 
-struct Products: View {
+struct ProductsView: View {
     var body: some View {
         VStack {
-            ProductsBanner()
-            ProductsEmptyState()
+            ProductsBannerView()
+            ProductsEmptyStateView()
         }
     }
 }
 
-struct Products_Previews: PreviewProvider {
+struct ProductsView_Previews: PreviewProvider {
     static var previews: some View {
-        Products()
+        ProductsView()
     }
 }

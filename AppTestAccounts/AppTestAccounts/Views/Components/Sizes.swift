@@ -18,37 +18,9 @@ struct FontSize {
 
 struct Padding {
     static let leading: CGFloat = 16
-    static let rowContainer: CGFloat = 16
-    static let textSpacing: CGFloat = 1
-    static let textSidesSpacingBig: CGFloat = 35
-    static let productBannerTextLeading: CGFloat = 16
-    static let productBannerTextBottom: CGFloat = 31
-    static let currenciesTextLeading: CGFloat = 24
-    static let currenciesTextTrailing: CGFloat = 24
-    static let currenciesTextTop: CGFloat = 40
-    static let currenciesTextBottom: CGFloat = 16
-    static let currenciesBottomOffset: CGFloat = -35
-    static let userTop: CGFloat = 60
-    static let userBottom: CGFloat = 23
-    static let imageCloudHomeBottom: CGFloat = 40
-    static let imageCloudProductsTop: CGFloat = 73
-    static let backgoundFillProductsTop: CGFloat = 190
-    static let backgoundFillHomeTop: CGFloat = 230
-    static let homeBannerBottom: CGFloat = 92.5
-    static let navigationTop: CGFloat = 21
-}
-
-struct IconSize {
-    static let nav: CGFloat = 28
-    static let flag: CGFloat = 32
-    static let user: CGFloat = 32
-}
-
-struct ImageSize {
-    struct emptyState {
-        static let width: CGFloat = 250
-        static let height: CGFloat = 194
-    }
+    static let trailing: CGFloat = 16
+    static let leadingBig: CGFloat = 35
+    static let trailingBig: CGFloat = 35
 }
 
 struct CornerRadius {
