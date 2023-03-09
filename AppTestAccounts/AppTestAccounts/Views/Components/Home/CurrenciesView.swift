@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CurrenciesView: View {
-    @ObservedObject var mainViewModel: MainViewModel
+    @ObservedObject var homeViewModel: HomeViewModel
     struct Constants {
         static let currenciesTextLeading: CGFloat = 24
         static let currenciesTextTrailing: CGFloat = 24
@@ -23,16 +23,16 @@ struct CurrenciesView: View {
                     .font(.system(size: FontSize.textMedium,
                                   weight: .medium))
                 Spacer()
-                if mainViewModel.accounts.count > 0 && !mainViewModel.isLoading {
-                    Text(mainViewModel.viewAllText)
+                if homeViewModel.accounts.count > 0 && !homeViewModel.isLoading {
+                    Text(homeViewModel.viewAllText)
                         .font(.system(size: FontSize.textMedium,
                                       weight: .medium))
                         .foregroundColor(Color("actionText"))
                         .animation(.easeInOut)
                         .onTapGesture {
                             withAnimation {
-                                mainViewModel.viewAll.toggle()
-                                mainViewModel.showAllAcountsIfNeeded()
+                                homeViewModel.viewAll.toggle()
+                                homeViewModel.showAllAcountsIfNeeded()
                             }
                         }
                 }
@@ -41,20 +41,20 @@ struct CurrenciesView: View {
             .padding(.trailing, Constants.currenciesTextTrailing)
             .padding(.top, Constants.currenciesTextTop)
             .padding(.bottom, Constants.currenciesTextBottom)
-            if mainViewModel.isLoading {
+            if homeViewModel.isLoading {
                 LoaderView(scale: 1)
             } else {
-                List(mainViewModel.accounts, id: \.accountId.self) { account in
+                List(homeViewModel.accounts, id: \.accountId.self) { account in
                     AccountRowView(account: account)
                         .listRowSeparator(.hidden)
                 }.refreshable {
-                    mainViewModel.getAccounts()
+                    homeViewModel.getAccounts()
                 }
                 .listStyle(PlainListStyle())
             }
             Spacer()
         }
-        .onAppear(perform: mainViewModel.getAccounts)
+        .onAppear(perform: homeViewModel.getAccounts)
         .background(Color("backgound"))
         .borderRadius(cornerRadius: CornerRadius.big,
                       corners: [.topLeft, .topRight])
@@ -64,6 +64,6 @@ struct CurrenciesView: View {
 
 struct CurrenciesView_Previews: PreviewProvider {
     static var previews: some View {
-        CurrenciesView(mainViewModel: MainViewModel(accountService: AccountService(client: URLSession.shared)))
+        CurrenciesView(homeViewModel: HomeViewModelBuilder.shared.build())
     }
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SideMenuView: View {
-    @ObservedObject var mainViewModel: MainViewModel
+    @ObservedObject var homeViewModel: HomeViewModel
 
     struct Constants {
         static let sideBarWidth = UIScreen.main.bounds.size.width * 0.6
@@ -24,11 +24,11 @@ struct SideMenuView: View {
                 EmptyView()
             }
             .background(.black.opacity(Constants.opacity))
-            .opacity(mainViewModel.isMenuVisible ? 1 : .zero)
+            .opacity(homeViewModel.isMenuVisible ? 1 : .zero)
             .animation(.easeInOut.delay(Constants.delay),
-                       value: mainViewModel.isMenuVisible)
+                       value: homeViewModel.isMenuVisible)
             .onTapGesture {
-                mainViewModel.isMenuVisible.toggle()
+                homeViewModel.isMenuVisible.toggle()
             }
             content
         }
@@ -42,9 +42,9 @@ struct SideMenuView: View {
                 MenuView()
             }
             .frame(width: Constants.sideBarWidth)
-            .offset(x: mainViewModel.isMenuVisible ? Constants.visibleMenuXPosition : Constants.screenWidth)
+            .offset(x: homeViewModel.isMenuVisible ? Constants.visibleMenuXPosition : Constants.screenWidth)
             .animation(.default,
-                       value: mainViewModel.isMenuVisible)
+                       value: homeViewModel.isMenuVisible)
             Spacer()
         }
     }
@@ -52,7 +52,7 @@ struct SideMenuView: View {
 
 struct SideMenuView_Previews: PreviewProvider {
     static var previews: some View {
-        SideMenuView(mainViewModel: MainViewModel(accountService: AccountService(client: URLSession.shared)))
+        SideMenuView(homeViewModel: HomeViewModelBuilder.shared.build())
     }
 }
 

@@ -8,29 +8,29 @@
 import SwiftUI
 
 struct HomeView: View {
-    @ObservedObject var mainViewModel: MainViewModel
+    @ObservedObject var viewModel: HomeViewModel
     struct Constants {
         static let currenciesTopViewAllMargin: CGFloat = 60
         static let currenciesTopOffset: CGFloat = -35
     }
     var body: some View {
         VStack {
-            if !mainViewModel.viewAll {
-                HomeBannerView(mainViewModel: mainViewModel)
+            if !viewModel.viewAll {
+                HomeBannerView(homeViewModel: viewModel)
                     .transition(.move(edge: .top))
             }
-            CurrenciesView(mainViewModel: mainViewModel)
-                .padding(.top, mainViewModel.viewAll ? Constants.currenciesTopViewAllMargin : Constants.currenciesTopOffset)
-        }.alert("Error", isPresented: $mainViewModel.showError, actions: {
+            CurrenciesView(homeViewModel: viewModel)
+                .padding(.top, viewModel.viewAll ? Constants.currenciesTopViewAllMargin : Constants.currenciesTopOffset)
+        }.alert("Error", isPresented: $viewModel.showError, actions: {
             Button("Ok", role: .cancel) { }
         }, message: {
-            Text(mainViewModel.errorMessage)
+            Text(viewModel.errorMessage)
         })
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(mainViewModel: MainViewModel(accountService: AccountService(client: URLSession.shared)))
+        HomeView(viewModel: HomeViewModelBuilder.shared.build())
     }
 }

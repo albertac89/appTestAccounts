@@ -7,15 +7,14 @@
 
 import Combine
 
-protocol MainViewModelProtocol {
+protocol HomeViewModelProtocol {
     func getAccounts()
     func showAllAcountsIfNeeded()
 }
 
-class MainViewModel: ObservableObject {
+final class HomeViewModel: ObservableObject {
     private var allAcounts = [Account]()
     @Published var accounts = [Account]()
-    @Published var navState: MainNav = .home
     @Published var isMenuVisible = false
     @Published var isLoading = false
     @Published var showError = false
@@ -31,7 +30,7 @@ class MainViewModel: ObservableObject {
     }
 }
 
-extension MainViewModel: MainViewModelProtocol {
+extension HomeViewModel: HomeViewModelProtocol {
     func getAccounts() {
         isLoading = true
         accountService.getAccounts().sink { completion in

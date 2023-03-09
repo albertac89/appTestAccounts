@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeBannerView: View {
-    @ObservedObject var mainViewModel: MainViewModel
+    @ObservedObject var homeViewModel: HomeViewModel
     struct Constants {
         static let userIconSize: CGFloat = 32
         static let userTopPadding: CGFloat = 60
@@ -24,7 +24,7 @@ struct HomeBannerView: View {
             VStack {
                 Button {
                     withAnimation {
-                        mainViewModel.isMenuVisible.toggle()
+                        homeViewModel.isMenuVisible.toggle()
                     }
                 } label: {
                     Image("user")
@@ -69,6 +69,6 @@ struct HomeBannerView: View {
 
 struct HomeBannerView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeBannerView(mainViewModel: MainViewModel(accountService: AccountService(client: URLSession.shared)))
+        HomeBannerView(homeViewModel: HomeViewModelBuilder.shared.build())
     }
 }

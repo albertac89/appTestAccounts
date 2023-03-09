@@ -11,6 +11,7 @@ enum APIError: LocalizedError {
     case invalidUrl
     case invalidResponse
     case genericError(String)
+    case cachedDataError
     
     var errorDescription: String? {
         switch self {
@@ -20,6 +21,8 @@ enum APIError: LocalizedError {
             return "Invalid response"
         case .genericError(let message):
             return message
+        case .cachedDataError:
+            return "Error retriving the catched data"
         }
     }
 }

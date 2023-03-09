@@ -11,7 +11,7 @@ import SwiftUI
 struct AppTestAccountsApp: App {
     var body: some Scene {
         WindowGroup {
-            MainView(viewModel: MainViewModel(accountService: AccountService(client: URLSession.shared)))
+            MainView(navState: .home, homeViewModel: HomeViewModelBuilder.shared.build())
         }
     }
 }

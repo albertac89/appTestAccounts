@@ -34,3 +34,19 @@ struct Amount: Codable {
         case currencyName = "currency_name"
     }
 }
+
+extension Amount {
+    func encode() -> Data? {
+        do {
+            return try JSONEncoder().encode(self)
+        } catch { print(error) }
+        return nil
+    }
+    
+    static func decode(_ amountData: Data?) -> Amount? {
+        do {
+            return try JSONDecoder().decode(Amount.self, from: amountData ?? Data())
+        } catch { print(error) }
+        return nil
+    }
+}

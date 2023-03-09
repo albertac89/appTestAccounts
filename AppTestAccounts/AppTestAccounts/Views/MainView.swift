@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct MainView: View {
-    @ObservedObject var viewModel: MainViewModel
+    @State var navState: NavState
+    @ObservedObject var homeViewModel: HomeViewModel
+
     var body: some View {
         ZStack {
             VStack {
-                switch viewModel.navState {
+                switch navState {
                 case .home:
-                    HomeView(mainViewModel: viewModel)
+                    HomeView(viewModel: homeViewModel)
                         .transition(.asymmetric(insertion: .move(edge: .leading),
                                                 removal: .move(edge: .trailing)))
                 case .products:
@@ -22,24 +24,19 @@ struct MainView: View {
                         .transition(.asymmetric(insertion: .move(edge: .leading),
                                                 removal: .move(edge: .trailing)))
                 }
-                BottomNavigationView(mainViewModel: viewModel)
+                BottomNavigationView(navState: $navState)
                     .background(Color("itemBackgound"))
                     .edgesIgnoringSafeArea(.bottom)
             }.background(
                 Image("backgoundImage").resizable()
             ).edgesIgnoringSafeArea(.top)
-            SideMenuView(mainViewModel: viewModel)
+            SideMenuView(homeViewModel: homeViewModel)
         }
     }
 }
 
-enum MainNav {
-    case home
-    case products
-}
-
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(viewModel: MainViewModel(accountService: AccountService(client: URLSession.shared)))
+        MainView(navState: .home, homeViewModel: HomeViewModelBuilder.shared.build())
     }
 }
