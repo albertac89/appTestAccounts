@@ -25,12 +25,17 @@ final class HomeViewModel: ObservableObject {
     private var accountService: AccountServiceProtocol
     private var subscribers = Set<AnyCancellable>()
     
+    /// Inejcts the dependencies needed for `HomeViewModel`.
+    ///
+    /// - Parameters:
+    ///     - accountService: A `Class` that conforms the protocol`AccountServiceProtocol`.
     init(accountService: AccountServiceProtocol) {
         self.accountService = accountService
     }
 }
 
 extension HomeViewModel: HomeViewModelProtocol {
+    /// To obtain the accounts to display.
     func getAccounts() {
         isLoading = true
         accountService.getAccounts().sink { completion in
@@ -50,6 +55,7 @@ extension HomeViewModel: HomeViewModelProtocol {
         .store(in: &subscribers)
     }
     
+    /// Depending on the `viewAll` Bool value you will see 3 accounts for `false` and all the accounf for `true`.
     func showAllAcountsIfNeeded() {
         viewAllText = viewAll ? "View less" : "View all"
         if viewAll {

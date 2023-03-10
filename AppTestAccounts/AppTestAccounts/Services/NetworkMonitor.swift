@@ -27,6 +27,7 @@ final class NetworkMonitor: NetworkMonitorProtocol {
         monitor.cancel()
     }
     
+    /// Starts monitoring the network connection and updates the state of `isNetworkAvailable`.
     func startMonitoring() {
         monitor.pathUpdateHandler = { path in
             if path.status == .satisfied {

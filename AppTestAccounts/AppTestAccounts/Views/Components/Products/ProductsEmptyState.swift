@@ -37,7 +37,7 @@ struct ProductsEmptyStateView: View {
             Spacer()
         }
         .background(Color("backgound"))
-        .borderRadius(cornerRadius: CornerRadius.big,
+        .borderRadius(CornerRadius.big,
                       corners: [.topLeft, .topRight])
     }
 }

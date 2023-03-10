@@ -27,8 +27,11 @@ final class AccountPercistanceManager {
 }
 
 extension AccountPercistanceManager: AccountPercistanceManagerProtocol {
+    /// Stores the current accounts to a `Core Data` entity named `Accounts`.
+    ///
+    /// - Parameters:
+    ///     - accounts: The accounts to store.
     func saveLastAccountsToCoreData(accounts: [Account]) {
-        let deviceId = UIDevice.current.identifierForVendor?.uuidString
         clearCoreDataAccountsEntity()
         accounts.forEach { account in
             if let entity = NSEntityDescription.entity(forEntityName: accountsEntityName, in: persistentContainer.viewContext),
@@ -49,6 +52,9 @@ extension AccountPercistanceManager: AccountPercistanceManagerProtocol {
         }
     }
 
+    /// Load the accounts sotred in `Core Data.
+    ///
+    /// - Returns: The accounts that where stored in ´Core Data´ or nil if there aren't any.
     func loadAccountsFromCoreData() -> [Account]? {
         var accounts: [NSManagedObject] = []
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: accountsEntityName)
@@ -77,6 +83,7 @@ extension AccountPercistanceManager: AccountPercistanceManagerProtocol {
 }
 
 private extension AccountPercistanceManager {
+    /// Clears all the data soted in the `Core Data` entity `accounts`
     func clearCoreDataAccountsEntity() {
         let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: accountsEntityName)
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)

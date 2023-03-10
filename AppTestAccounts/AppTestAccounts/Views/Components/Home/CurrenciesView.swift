@@ -56,7 +56,7 @@ struct CurrenciesView: View {
         }
         .onAppear(perform: homeViewModel.getAccounts)
         .background(Color("backgound"))
-        .borderRadius(cornerRadius: CornerRadius.big,
+        .borderRadius(CornerRadius.big,
                       corners: [.topLeft, .topRight])
         
     }

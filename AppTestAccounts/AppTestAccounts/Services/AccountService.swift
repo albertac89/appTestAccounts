@@ -18,6 +18,13 @@ final class AccountService {
     private var accountPercistanceManager: AccountPercistanceManagerProtocol
     private var errorHandler: ErrorHandlerProtocol
     
+    /// Inejcts the dependencies needed for `AccountService`.
+    ///
+    /// - Parameters:
+    ///     - client: The client to calll the services needed`.
+    ///     - networkMonitor: A `Class` that conforms the protocol`NetworkMonitorProtocol`.
+    ///     - accountPercistanceManager: A `Class` that conforms the protocol`AccountPercistanceManagerProtocol`.
+    ///     - errorHandler: A `Class` that conforms the protocol`ErrorHandlerProtocol`.
     init(client: URLSession,
          networkMonitor: NetworkMonitorProtocol,
          accountPercistanceManager: AccountPercistanceManagerProtocol,
@@ -30,7 +37,9 @@ final class AccountService {
 }
 
 extension AccountService: AccountServiceProtocol {
-   
+    /// Does the service call to obtain the accounts.
+    ///
+    /// - Returns: A `Publisher` to observe the service completion.
     func getAccounts() -> AnyPublisher<[Account], Error> {
         if !networkMonitor.isNetworkAvailable {
             guard let accountsCached = accountPercistanceManager.loadAccountsFromCoreData() else {
@@ -43,7 +52,7 @@ extension AccountService: AccountServiceProtocol {
         }
         return client.dataTaskPublisher(for: urlAccounts)
             .tryMap { (data: Data, response: URLResponse) in
-                try self.errorHandler.handleError(data: data, response: response)
+                try self.errorHandler.checkError(data: data, response: response)
                 return data
             }
             .decode(type: [Account].self, decoder: JSONDecoder())

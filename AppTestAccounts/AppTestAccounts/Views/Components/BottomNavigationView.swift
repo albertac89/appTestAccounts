@@ -63,7 +63,7 @@ struct BottomNavigationView: View {
         }
         .padding(.top, Constants.navigationTop)
         .background(Color("itemBackgound")).edgesIgnoringSafeArea(.bottom)
-        .borderRadius(cornerRadius: CornerRadius.medium,
+        .borderRadius(CornerRadius.medium,
                       corners: [.topLeft, .topRight])
         .shadow(radius: colorScheme == .dark ? .zero : ShadowSize.small,
                 y: colorScheme == .dark ? .zero : ShadowSize.offsetBig)

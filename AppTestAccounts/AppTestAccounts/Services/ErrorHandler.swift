@@ -8,11 +8,16 @@
 import Foundation
 
 protocol ErrorHandlerProtocol {
-    func handleError(data: Data, response: URLResponse?) throws
+    func checkError(data: Data, response: URLResponse?) throws
 }
 
 final class ErrorHandler: ErrorHandlerProtocol {
-    func handleError(data: Data, response: URLResponse?) throws {
+    /// Checks whether there is an erro with the service response and throws an erro if needed.
+    ///
+    /// - Parameters:
+    ///     - data: The `Data`from the service.
+    ///     - response: `URLResponse` from the service.
+    func checkError(data: Data, response: URLResponse?) throws {
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw APIError.invalidResponse
         }

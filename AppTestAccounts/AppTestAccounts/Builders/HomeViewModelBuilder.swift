@@ -9,6 +9,10 @@ import Foundation
 
 final class HomeViewModelBuilder {
     static let shared = HomeViewModelBuilder()
+    
+    /// Generates a `HomeViewModel` with all his dependencies.
+    ///
+    /// - Returns: A `HomeViewModel`.
     func build() -> HomeViewModel {
         let client = URLSession.shared
         let networkMonitor = NetworkMonitor()

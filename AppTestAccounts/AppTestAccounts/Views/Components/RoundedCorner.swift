@@ -12,6 +12,12 @@ struct RoundedCorner: Shape {
     var radius: CGFloat = .infinity
     var corners: UIRectCorner = .allCorners
     
+    /// Return a path to render in a `View`.
+    ///
+    /// - Parameters:
+    ///     - rect: The rectangle to render the path
+    ///
+    /// - Returns: A `Path` to be rended.
     func path(in rect: CGRect) -> Path {
         let path = UIBezierPath(roundedRect: rect,
                                 byRoundingCorners: corners,
@@ -21,11 +27,16 @@ struct RoundedCorner: Shape {
 }
 
 extension View {
-    /// Add border radius to a specified corner or corners
-    public func borderRadius<S>(_ content: S = Color.white, width: CGFloat = .zero, cornerRadius: CGFloat, corners: UIRectCorner) -> some View where S : ShapeStyle {
+    /// Adds border radius to a specified corner or corners of a `View`.
+    ///
+    /// - Parameters:
+    ///     - content: Color of the stroke.
+    ///     - width: Width of the line of the stroke.
+    ///     - cornerRadius: Radius of the corner or corners.
+    ///     - corners: Array of the  `UIRectCorner` to modify.
+    public func borderRadius(_ cornerRadius: CGFloat, corners: UIRectCorner) -> some View {
         let roundedRect = RoundedCorner(radius: cornerRadius,
                                         corners: [.topLeft, .topRight])
         return clipShape(roundedRect)
-            .overlay(roundedRect.stroke(content, lineWidth: width))
     }
 }

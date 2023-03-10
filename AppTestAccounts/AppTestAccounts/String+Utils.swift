@@ -8,6 +8,9 @@
 import Foundation
 
 extension String {
+    /// Formats a numeric `String`
+    ///
+    /// - Returns: An amount `String` formated with 2 decimals
     var currencyFormat: String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
