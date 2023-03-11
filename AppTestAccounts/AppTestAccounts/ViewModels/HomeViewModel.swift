@@ -38,7 +38,8 @@ extension HomeViewModel: HomeViewModelProtocol {
     /// To obtain the accounts to display.
     func getAccounts() {
         isLoading = true
-        accountService.getAccounts().sink { completion in
+        accountService.getAccounts().sink { [weak self] completion in
+            guard let self = self else { return }
             switch completion {
             case .failure(let error):
                 self.errorMessage = error.localizedDescription
@@ -48,7 +49,8 @@ extension HomeViewModel: HomeViewModelProtocol {
                 self.isLoading = false
             }
             return
-        } receiveValue: { accounts in
+        } receiveValue: { [weak self] accounts in
+            guard let self = self else { return }
             self.allAcounts = accounts
             self.showAllAcountsIfNeeded()
         }

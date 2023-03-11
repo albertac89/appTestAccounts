@@ -26,13 +26,3 @@ enum APIError: LocalizedError {
         }
     }
 }
-
-struct APIErrorMessage: Codable {
-    let response: String
-    let message: String
-    
-    enum CodingKeys: String, CodingKey {
-        case response = "Response"
-        case message = "Message"
-    }
-}

@@ -51,17 +51,17 @@ extension AccountService: AccountServiceProtocol {
             return Fail(error: APIError.invalidUrl).eraseToAnyPublisher()
         }
         return client.dataTaskPublisher(for: urlAccounts)
-            .tryMap { (data: Data, response: URLResponse) in
-                try self.errorHandler.checkError(data: data, response: response)
+            .tryMap { [errorHandler] (data: Data, response: URLResponse) in
+                try errorHandler.checkError(data: data, response: response)
                 return data
             }
             .decode(type: [Account].self, decoder: JSONDecoder())
-            .compactMap({ accounts in
-                self.accountPercistanceManager.saveLastAccountsToCoreData(accounts: accounts)
+            .compactMap({ [accountPercistanceManager] accounts in
+                accountPercistanceManager.saveLastAccountsToCoreData(accounts: accounts)
                 return accounts
             })
             .share()
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
 }

@@ -21,11 +21,5 @@ final class ErrorHandler: ErrorHandlerProtocol {
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw APIError.invalidResponse
         }
-        
-        let decoder = JSONDecoder()
-        let apiError = try? decoder.decode(APIErrorMessage.self, from: data)
-        if let error = apiError, error.response == "Error" {
-            throw APIError.genericError(error.message)
-        }
     }
 }

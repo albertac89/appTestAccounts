@@ -29,12 +29,13 @@ final class NetworkMonitor: NetworkMonitorProtocol {
     
     /// Starts monitoring the network connection and updates the state of `isNetworkAvailable`.
     func startMonitoring() {
-        monitor.pathUpdateHandler = { path in
+        monitor.pathUpdateHandler = { [weak self] path in
+            guard let self = self else { return }
             if path.status == .satisfied {
                 self.isNetworkAvailable = true
-           } else {
+            } else {
                 self.isNetworkAvailable = false
-           }
+            }
         }
     }
 }
