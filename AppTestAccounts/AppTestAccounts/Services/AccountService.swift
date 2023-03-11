@@ -47,7 +47,7 @@ extension AccountService: AccountServiceProtocol {
             }
             return Just(accountsCached).setFailureType(to: Error.self).eraseToAnyPublisher()
         }
-        guard let urlAccounts = URL(string: "https://6l221.wiremockapi.cloud/accounts") else {
+        guard let urlAccounts = URL(string: "http://localhost:3000/accounts") else {
             return Fail(error: APIError.invalidUrl).eraseToAnyPublisher()
         }
         return client.dataTaskPublisher(for: urlAccounts)
