@@ -14,16 +14,12 @@ protocol AccountPercistanceManagerProtocol {
 }
 
 final class AccountPercistanceManager {
-    private var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "AppTestAccounts")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                fatalError("Error: \(error), \(error.userInfo)")
-            }
-        })
-        return container
-    }()
+    private var persistentContainer: NSPersistentContainer
     private let accountsEntityName = "Accounts"
+    
+    init(persistentContainer: NSPersistentContainer) {
+        self.persistentContainer = persistentContainer
+    }
 }
 
 extension AccountPercistanceManager: AccountPercistanceManagerProtocol {
