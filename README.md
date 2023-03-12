@@ -12,6 +12,9 @@ First yo need to download Nodejs, you can donwload it from here https://nodejs.o
 
 Then go to the folder apiMock an type:
 ```bash
+npm install express --save
+```
+```bash
 npm install
 ```
 And to start the server
