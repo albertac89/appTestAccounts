@@ -8,7 +8,9 @@ It has an offline mode that will show you the las accounts displayed in the list
 
 Before staring the the app you need to start the api mock.
 
-Go to the folder apiMock an type:
+First yo need to download Nodejs, you can donwload it from here https://nodejs.org/es/.
+
+Then go to the folder apiMock an type:
 ```bash
 npm install
 ```
