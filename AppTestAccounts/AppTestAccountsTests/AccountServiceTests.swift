@@ -43,7 +43,7 @@ final class AccountServiceTests: XCTestCase {
         let expectation = XCTestExpectation()
         networkMonitor.isNetworkAvailable = true
         
-        // Initial vaues
+        // Initial values
         XCTAssertEqual(accountPercistanceManager.loadAccountsFromCoreDataCount, 0)
         XCTAssertEqual(accountPercistanceManager.saveLastAccountsToCoreDataCount, 0)
         XCTAssertEqual(errorHandler.checkErrorCount, 0)
@@ -74,7 +74,7 @@ final class AccountServiceTests: XCTestCase {
         let expectation = XCTestExpectation()
         networkMonitor.isNetworkAvailable = false
         
-        // Initial vaues
+        // Initial values
         XCTAssertEqual(accountPercistanceManager.loadAccountsFromCoreDataCount, 0)
         XCTAssertEqual(accountPercistanceManager.saveLastAccountsToCoreDataCount, 0)
         XCTAssertEqual(errorHandler.checkErrorCount, 0)

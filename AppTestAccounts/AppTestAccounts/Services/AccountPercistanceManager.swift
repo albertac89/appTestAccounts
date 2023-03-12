@@ -17,6 +17,10 @@ final class AccountPercistanceManager {
     private var persistentContainer: NSPersistentContainer
     private let accountsEntityName = "Accounts"
     
+    /// Inejcts the dependencies needed for the`AccountPercistanceManager`.
+    ///
+    /// - Parameters:
+    ///     - persistentContainer: The persisten container to use `Core Data`.
     init(persistentContainer: NSPersistentContainer) {
         self.persistentContainer = persistentContainer
     }
