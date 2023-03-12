@@ -62,7 +62,7 @@ struct BottomNavigationView: View {
             }.foregroundColor(Color(navState == .products ? "selectedIconColor" : "iconColor"))
         }
         .padding(.top, Constants.navigationTop)
-        .background(Color("itemBackgound")).edgesIgnoringSafeArea(.bottom)
+        .background(Color("ItemBackgound")).edgesIgnoringSafeArea(.bottom)
         .borderRadius(CornerRadius.medium,
                       corners: [.topLeft, .topRight])
         .shadow(radius: colorScheme == .dark ? .zero : ShadowSize.small,

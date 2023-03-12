@@ -39,7 +39,7 @@ struct AccountRowView: View {
                               weight: .medium))
         }
         .padding(Constants.rowPadding)
-        .background(Color("itemBackgound"))
+        .background(Color("ItemBackgound"))
         .cornerRadius(CornerRadius.small)
         .shadow(radius: colorScheme == .dark ? .zero : ShadowSize.big)
     }

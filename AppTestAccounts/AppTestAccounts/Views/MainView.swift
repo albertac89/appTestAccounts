@@ -25,7 +25,7 @@ struct MainView: View {
                                                 removal: .move(edge: .trailing)))
                 }
                 BottomNavigationView(navState: $navState)
-                    .background(Color("itemBackgound"))
+                    .background(Color("ItemBackgound"))
                     .edgesIgnoringSafeArea(.bottom)
             }.background(
                 Image("backgoundImage").resizable()

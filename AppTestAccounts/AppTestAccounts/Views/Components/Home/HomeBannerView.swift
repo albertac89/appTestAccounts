@@ -28,7 +28,6 @@ struct HomeBannerView: View {
                     }
                 } label: {
                     Image("user")
-                        .resizable()
                         .frame(maxWidth: Constants.userIconSize,
                                maxHeight: Constants.userIconSize,
                                alignment: .leading)

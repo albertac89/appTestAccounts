@@ -34,7 +34,7 @@ struct ButtonMenuView: View {
             .frame(maxWidth: .infinity,
                    alignment: .center)
         }
-        .background(Color("itemBackgound"))
+        .background(Color("ItemBackgound"))
         .cornerRadius(CornerRadius.small)
         .padding(.leading, Padding.leading)
         .padding(.trailing, Padding.trailing)
